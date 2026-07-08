@@ -1,0 +1,1571 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>灵感闪记</title>
+  <style>
+    :root {
+      --bg: #050811;
+      --panel: rgba(15, 20, 33, 0.82);
+      --panel-2: rgba(20, 26, 43, 0.92);
+      --panel-3: rgba(12, 17, 29, 0.96);
+      --line: rgba(147, 162, 255, 0.14);
+      --line-2: rgba(255, 255, 255, 0.08);
+      --text: #eef2ff;
+      --muted: #8d96ad;
+      --muted-2: #5d667a;
+      --blue: #6a7cff;
+      --blue-2: #8b5cff;
+      --pink: #ff5fd2;
+      --cyan: #5de7ff;
+      --green: #64e6a1;
+      --yellow: #ffd36a;
+      --red: #ff6d7a;
+      --shadow: 0 22px 70px rgba(0, 0, 0, 0.42);
+      --glow: 0 0 32px rgba(106, 124, 255, 0.42);
+      --radius-xl: 30px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --radius-sm: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: #02040b;
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+    }
+
+    body {
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 18% 5%, rgba(108, 98, 255, 0.26), transparent 30%),
+        radial-gradient(circle at 84% 12%, rgba(255, 95, 210, 0.18), transparent 28%),
+        radial-gradient(circle at 50% 86%, rgba(0, 138, 255, 0.16), transparent 36%),
+        linear-gradient(180deg, #030711 0%, #060a14 48%, #02040a 100%);
+      z-index: -3;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      opacity: 0.36;
+      background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 36px 36px;
+      mask-image: linear-gradient(to bottom, transparent 0%, black 18%, black 78%, transparent 100%);
+      z-index: -2;
+      pointer-events: none;
+    }
+
+    button, input, textarea, select {
+      font-family: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 430px;
+      min-height: 100vh;
+      margin: 0 auto;
+      padding: 18px 16px 102px;
+      position: relative;
+    }
+
+    .aurora {
+      position: fixed;
+      top: 24px;
+      left: 50%;
+      width: 340px;
+      height: 180px;
+      transform: translateX(-50%) rotate(-8deg);
+      background:
+        linear-gradient(90deg, transparent, rgba(106,124,255,.34), rgba(255,95,210,.34), transparent);
+      filter: blur(24px);
+      opacity: .78;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 2px 18px;
+      gap: 14px;
+    }
+
+    .brand-mini {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at 35% 30%, #ffffff 0 2px, transparent 3px),
+        linear-gradient(145deg, rgba(106,124,255,.95), rgba(255,95,210,.75));
+      box-shadow: 0 0 24px rgba(106,124,255,.42);
+      font-size: 19px;
+    }
+
+    .brand-mini h1 {
+      margin: 0;
+      font-size: 20px;
+      letter-spacing: -0.3px;
+    }
+
+    .brand-mini p {
+      margin: 2px 0 0;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .icon-btn {
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(11, 17, 30, .78);
+      color: var(--text);
+      display: grid;
+      place-items: center;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(112, 128, 255, .26);
+      border-radius: 34px;
+      padding: 24px 20px 20px;
+      min-height: 250px;
+      background:
+        radial-gradient(circle at 100% 0%, rgba(106,124,255,.34), transparent 34%),
+        radial-gradient(circle at 5% 20%, rgba(255,95,210,.14), transparent 32%),
+        linear-gradient(160deg, rgba(16,23,43,.96), rgba(8,13,24,.92));
+      box-shadow: var(--shadow), 0 0 42px rgba(106,124,255,.16);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      right: -48px;
+      top: -40px;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.08);
+      background: radial-gradient(circle, rgba(106,124,255,.28), transparent 58%);
+      filter: blur(.2px);
+      pointer-events: none;
+    }
+
+    .hero-kicker {
+      color: var(--muted);
+      font-size: 13px;
+      letter-spacing: .4px;
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-size: 34px;
+      line-height: 1.16;
+      margin: 0 0 22px;
+      letter-spacing: -1.2px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #ffffff 0%, #91a0ff 43%, #ff74dc 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 34px rgba(106,124,255,.12);
+    }
+
+    .capture-box {
+      border: 1px solid rgba(115, 132, 255, .45);
+      border-radius: 22px;
+      background:
+        radial-gradient(circle at 92% 0%, rgba(106,124,255,.28), transparent 35%),
+        rgba(9, 15, 30, .82);
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,.035),
+        0 0 26px rgba(106,124,255,.28);
+      padding: 14px;
+      position: relative;
+    }
+
+    .capture-box::after {
+      content: "";
+      position: absolute;
+      right: 16px;
+      top: -5px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: white;
+      box-shadow: 0 0 18px rgba(255,255,255,.9), 0 0 34px rgba(106,124,255,.9);
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 94px;
+      max-height: 180px;
+      resize: none;
+      border: 0;
+      outline: none;
+      background: transparent;
+      color: var(--text);
+      font-size: 17px;
+      line-height: 1.55;
+    }
+
+    textarea::placeholder {
+      color: rgba(202, 210, 235, .46);
+    }
+
+    .capture-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .char-count {
+      color: var(--muted-2);
+      font-size: 12px;
+    }
+
+    .save-btn {
+      border: 0;
+      color: white;
+      padding: 11px 15px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--blue), var(--blue-2));
+      box-shadow: 0 0 22px rgba(106, 124, 255, .38);
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+
+    .chips {
+      display: flex;
+      gap: 9px;
+      overflow-x: auto;
+      padding: 16px 2px 4px;
+      scrollbar-width: none;
+    }
+
+    .chips::-webkit-scrollbar {
+      display: none;
+    }
+
+    .chip {
+      flex: 0 0 auto;
+      border: 1px solid rgba(139, 154, 255, .18);
+      background: rgba(11, 17, 31, .82);
+      color: var(--muted);
+      border-radius: 999px;
+      padding: 9px 13px;
+      font-size: 13px;
+    }
+
+    .chip.active {
+      color: #fff;
+      border-color: rgba(122, 137, 255, .7);
+      background: linear-gradient(135deg, rgba(106,124,255,.95), rgba(139,92,255,.82));
+      box-shadow: 0 0 22px rgba(106,124,255,.26);
+    }
+
+    .section-title {
+      margin: 22px 2px 12px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .section-title h2 {
+      margin: 0;
+      font-size: 18px;
+      letter-spacing: -.2px;
+    }
+
+    .section-title span,
+    .section-title button {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .section-title button {
+      border: 0;
+      background: transparent;
+      padding: 0;
+    }
+
+
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+      animation: fadeIn .22s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .toolbar-sticky {
+      position: sticky;
+      top: 0;
+      z-index: 18;
+      padding: 8px 0 14px;
+      background: linear-gradient(180deg, rgba(5,8,17,.98), rgba(5,8,17,.78), transparent);
+      backdrop-filter: blur(16px);
+    }
+
+    .search-wrap {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-top: 4px;
+    }
+
+    .search {
+      flex: 1;
+      border: 1px solid var(--line-2);
+      background: rgba(13, 19, 32, .92);
+      border-radius: 18px;
+      padding: 13px 14px;
+      outline: none;
+      color: var(--text);
+      font-size: 14px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
+    }
+
+    .search::placeholder {
+      color: var(--muted-2);
+    }
+
+    .filter-btn {
+      width: 46px;
+      height: 46px;
+      border: 1px solid var(--line-2);
+      border-radius: 16px;
+      background: rgba(13, 19, 32, .92);
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      overflow: visible;
+      padding: 10px 0 0;
+    }
+
+    .filter-pill {
+      flex: 0 0 auto;
+      border: 1px solid var(--line-2);
+      background: rgba(13, 19, 32, .82);
+      color: var(--muted);
+      border-radius: 12px;
+      padding: 8px 11px;
+      font-size: 12px;
+      min-width: 48px;
+    }
+
+    .filter-pill.active {
+      color: #fff;
+      background: rgba(106,124,255,.92);
+      border-color: rgba(149,162,255,.8);
+      box-shadow: 0 0 18px rgba(106,124,255,.22);
+    }
+
+    .list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .idea-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(147,162,255,.11);
+      border-radius: 18px;
+      background:
+        linear-gradient(180deg, rgba(18, 24, 38, .88), rgba(10, 15, 25, .92));
+      box-shadow: 0 10px 26px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.04);
+      padding: 13px 13px 12px;
+      animation: cardRise .2s ease-out;
+    }
+
+
+    .idea-card.worth {
+      border-color: rgba(100, 230, 161, .48);
+      background:
+        radial-gradient(circle at 100% 0%, rgba(100, 230, 161, .18), transparent 28%),
+        linear-gradient(180deg, rgba(18, 31, 31, .96), rgba(9, 20, 19, .94));
+      box-shadow:
+        0 16px 38px rgba(0,0,0,.28),
+        0 0 28px rgba(100, 230, 161, .18),
+        inset 0 1px 0 rgba(255,255,255,.06);
+    }
+
+    .idea-card.worth::before {
+      background: linear-gradient(180deg, var(--green), var(--cyan));
+      height: 52px;
+      box-shadow: 0 0 18px rgba(100, 230, 161, .75);
+    }
+
+    .idea-card.worth .idea-title {
+      color: #f4fff9;
+    }
+
+    .idea-card.worth .tag.status {
+      color: #06110c;
+      background: linear-gradient(135deg, rgba(100,230,161,.95), rgba(93,231,255,.78));
+      border-color: rgba(100,230,161,.7);
+      font-weight: 700;
+    }
+
+    .worth-badge {
+      position: absolute;
+      right: 48px;
+      top: 13px;
+      border: 1px solid rgba(100,230,161,.38);
+      background: rgba(100,230,161,.12);
+      color: var(--green);
+      border-radius: 999px;
+      padding: 4px 8px;
+      font-size: 10px;
+      font-weight: 700;
+      box-shadow: 0 0 16px rgba(100,230,161,.18);
+    }
+
+    @keyframes cardRise {
+      from { opacity: 0; transform: translateY(7px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .idea-card::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 16px;
+      width: 3px;
+      height: 34px;
+      border-radius: 0 999px 999px 0;
+      background: linear-gradient(180deg, var(--blue), var(--pink));
+      opacity: .88;
+    }
+
+    .card-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .idea-title {
+      flex: 1;
+      min-width: 0;
+      outline: none;
+      font-size: 15px;
+      line-height: 1.4;
+      font-weight: 650;
+      word-break: break-word;
+      padding-left: 2px;
+    }
+
+    .idea-title:focus {
+      background: rgba(255,255,255,.04);
+      border-radius: 9px;
+      box-shadow: 0 0 0 5px rgba(255,255,255,.04);
+    }
+
+    .star {
+      flex: 0 0 auto;
+      width: 28px;
+      height: 28px;
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 10px;
+      background: rgba(255,255,255,.035);
+      color: var(--muted);
+      display: grid;
+      place-items: center;
+      font-size: 15px;
+    }
+
+    .star.active {
+      color: var(--yellow);
+      border-color: rgba(255, 211, 106, .22);
+      background: rgba(255, 211, 106, .07);
+      text-shadow: 0 0 12px rgba(255, 211, 106, .55);
+    }
+
+    .card-desc {
+      margin: 7px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+      word-break: break-word;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .card-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+      margin: 10px 0 0;
+    }
+
+    .tag {
+      border-radius: 999px;
+      padding: 4px 7px;
+      font-size: 10px;
+      color: #bfc7df;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.055);
+    }
+
+    .tag.category {
+      color: var(--green);
+      background: rgba(100, 230, 161, .08);
+      border-color: rgba(100,230,161,.15);
+    }
+
+    .tag.status {
+      color: #fff;
+      background: rgba(106,124,255,.13);
+      border-color: rgba(106,124,255,.22);
+    }
+
+    .tag.time {
+      color: var(--muted-2);
+      margin-left: auto;
+    }
+
+    .compact-control {
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .status-select,
+    .category-select {
+      min-width: 0;
+      border: 1px solid rgba(147,162,255,.13);
+      background: rgba(255,255,255,.045);
+      color: var(--text);
+      border-radius: 12px;
+      padding: 8px 24px 8px 9px;
+      font-size: 12px;
+      outline: none;
+      appearance: none;
+      background-image: linear-gradient(45deg, transparent 50%, rgba(238,242,255,.65) 50%), linear-gradient(135deg, rgba(238,242,255,.65) 50%, transparent 50%);
+      background-position: calc(100% - 14px) 13px, calc(100% - 9px) 13px;
+      background-size: 5px 5px, 5px 5px;
+      background-repeat: no-repeat;
+    }
+
+    .status-select option,
+    .category-select option {
+      background: #0f1421;
+      color: #eef2ff;
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 6px;
+      flex: 0 0 auto;
+    }
+
+    .mini-btn {
+      border: 1px solid rgba(255,255,255,.065);
+      background: rgba(255,255,255,.04);
+      color: var(--muted);
+      border-radius: 12px;
+      width: 34px;
+      height: 34px;
+      padding: 0;
+      font-size: 13px;
+      display: grid;
+      place-items: center;
+    }
+
+    .mini-btn.primary {
+      color: #fff;
+      border-color: rgba(106,124,255,.35);
+      background: rgba(106,124,255,.14);
+    }
+
+    .mini-btn.danger {
+      color: var(--red);
+    }
+
+    .empty {
+      text-align: center;
+      padding: 38px 20px;
+      color: var(--muted);
+      border: 1px dashed rgba(147,162,255,.18);
+      border-radius: 24px;
+      background: rgba(12,18,32,.48);
+      line-height: 1.7;
+    }
+
+    .review-card,
+    .setting-card,
+    .detail-card {
+      border: 1px solid rgba(147,162,255,.13);
+      border-radius: 24px;
+      background: rgba(13,19,32,.86);
+      box-shadow: 0 16px 38px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.045);
+      padding: 17px;
+      margin-bottom: 12px;
+    }
+
+    .review-card h3,
+    .setting-card h3 {
+      margin: 0 0 9px;
+      font-size: 16px;
+    }
+
+    .review-card p,
+    .setting-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .review-num {
+      font-size: 34px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      background: linear-gradient(90deg, #fff, #91a0ff);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .settings-actions {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .setting-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid rgba(147,162,255,.13);
+      border-radius: 18px;
+      background: rgba(255,255,255,.045);
+      color: var(--text);
+      padding: 14px;
+      font-size: 14px;
+    }
+
+    .setting-btn span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .bottom-nav {
+      position: fixed;
+      left: 50%;
+      bottom: max(12px, env(safe-area-inset-bottom));
+      transform: translateX(-50%);
+      width: min(398px, calc(100% - 24px));
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 5px;
+      padding: 8px;
+      border: 1px solid rgba(147,162,255,.15);
+      border-radius: 26px;
+      background: rgba(10, 15, 27, .86);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 18px 60px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.05);
+      z-index: 80;
+    }
+
+    .nav-btn {
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      border-radius: 19px;
+      padding: 9px 2px 8px;
+      font-size: 11px;
+    }
+
+    .nav-btn b {
+      display: block;
+      font-size: 19px;
+      line-height: 1.1;
+      margin-bottom: 4px;
+      font-weight: 500;
+    }
+
+    .nav-btn.active {
+      color: #fff;
+      background: linear-gradient(135deg, rgba(106,124,255,.88), rgba(139,92,255,.7));
+      box-shadow: 0 0 20px rgba(106,124,255,.24);
+    }
+
+    .fab {
+      position: fixed;
+      left: 50%;
+      bottom: max(86px, calc(env(safe-area-inset-bottom) + 86px));
+      transform: translateX(-50%);
+      width: 60px;
+      height: 60px;
+      border: 0;
+      border-radius: 22px;
+      display: grid;
+      place-items: center;
+      color: white;
+      font-size: 30px;
+      background: linear-gradient(135deg, var(--blue), var(--blue-2), var(--pink));
+      box-shadow: 0 0 34px rgba(106,124,255,.45);
+      z-index: 76;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: max(158px, calc(env(safe-area-inset-bottom) + 158px));
+      transform: translateX(-50%) translateY(10px);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 120;
+      background: rgba(238,242,255,.92);
+      color: #050811;
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-size: 13px;
+      transition: .2s ease;
+      box-shadow: 0 18px 38px rgba(0,0,0,.32);
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .modal-mask {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.58);
+      backdrop-filter: blur(8px);
+      z-index: 130;
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 14px;
+    }
+
+    .modal-mask.show {
+      display: flex;
+    }
+
+    .modal {
+      width: min(398px, 100%);
+      border: 1px solid rgba(147,162,255,.18);
+      border-radius: 28px;
+      padding: 16px;
+      background:
+        radial-gradient(circle at 90% 0%, rgba(106,124,255,.22), transparent 32%),
+        rgba(12, 17, 29, .96);
+      box-shadow: 0 30px 90px rgba(0,0,0,.62);
+      animation: sheetUp .2s ease-out;
+    }
+
+    @keyframes sheetUp {
+      from { transform: translateY(18px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .modal h3 {
+      margin: 4px 4px 12px;
+      font-size: 18px;
+    }
+
+    .modal textarea {
+      min-height: 120px;
+      border: 1px solid rgba(147,162,255,.18);
+      border-radius: 20px;
+      padding: 14px;
+      background: rgba(5,8,17,.6);
+    }
+
+    .modal-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .modal-row button {
+      flex: 1;
+      border: 1px solid rgba(147,162,255,.18);
+      border-radius: 16px;
+      padding: 13px;
+      color: var(--text);
+      background: rgba(255,255,255,.055);
+      font-size: 14px;
+    }
+
+    .modal-row button.primary {
+      border: 0;
+      background: linear-gradient(135deg, var(--blue), var(--blue-2));
+      box-shadow: 0 0 22px rgba(106,124,255,.3);
+    }
+
+
+    @media (max-width: 370px) {
+      .compact-control {
+        grid-template-columns: 1fr;
+      }
+
+      .card-actions {
+        justify-content: flex-end;
+      }
+    }
+
+    @media (min-width: 760px) {
+      .app {
+        padding-top: 28px;
+      }
+
+      .fab {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="aurora"></div>
+
+  <main class="app">
+    <header class="topbar">
+      <div class="brand-mini">
+        <div class="logo-mark">✦</div>
+        <div>
+          <h1>灵感闪记</h1>
+          <p>随时记录 · 灵感不再溜走</p>
+        </div>
+      </div>
+      <button class="icon-btn" id="openQuickModal" title="快速记录">＋</button>
+    </header>
+
+    <section class="page active" id="page-home">
+      <div class="hero">
+        <div class="hero-kicker">CAPTURE · QUICK IDEA</div>
+        <h2 class="hero-title">
+          记录刚刚<br>
+          <span class="gradient-text">闪过的灵感</span>
+        </h2>
+
+        <div class="capture-box">
+          <textarea id="ideaInput" maxlength="600" placeholder="现在的想法是..."></textarea>
+          <div class="capture-bottom">
+            <span class="char-count"><span id="charNow">0</span>/600</span>
+            <button class="save-btn" id="saveBtn">⚡ 超快记录</button>
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="section-title">
+        <h2>最近记录</h2>
+        <button data-jump="inbox">查看全部</button>
+      </div>
+      <div class="list" id="recentList"></div>
+    </section>
+
+    <section class="page" id="page-inbox">
+      <div class="toolbar-sticky">
+        <div class="section-title" style="margin-top:2px;">
+          <div>
+            <h2>灵感库</h2>
+            <span>所有灵感，统一整理</span>
+          </div>
+          <span id="inboxCount">0 条</span>
+        </div>
+
+        <div class="search-wrap">
+          <input class="search" id="searchInput" placeholder="搜索灵感、标签、内容..." />
+          <button class="filter-btn" title="筛选">⌁</button>
+        </div>
+
+        <div class="filter-row" id="statusFilters"></div>
+        <div class="filter-row" id="categoryFilters"></div>
+      </div>
+
+      <div class="list" id="inboxList"></div>
+    </section>
+
+    <section class="page" id="page-review">
+      <div class="section-title" style="margin-top:2px;">
+        <div>
+          <h2>回顾</h2>
+          <span>高效检索，持续激发灵感</span>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <h3>本周回顾</h3>
+        <div class="review-num" id="weekCount">0</div>
+        <p>本周新增灵感。建议每周挑出 3 条，转成真正可以行动的小任务。</p>
+      </div>
+
+      <div class="review-card">
+        <h3>潜力灵感</h3>
+        <div class="review-num" id="reviewWorthCount">0</div>
+        <p>已经被你标记为“值得做”的想法。这里是最值得优先整理的灵感池。</p>
+      </div>
+
+      <div class="section-title">
+        <h2>值得做</h2>
+        <span>优先整理</span>
+      </div>
+      <div class="list" id="worthList"></div>
+    </section>
+
+    <section class="page" id="page-settings">
+      <div class="section-title" style="margin-top:2px;">
+        <div>
+          <h2>设置</h2>
+          <span>数据保存在本地浏览器</span>
+        </div>
+      </div>
+
+      <div class="setting-card">
+        <h3>数据备份</h3>
+        <p>当前是纯静态网页版本，不需要登录，不需要数据库。建议定期导出，避免清理浏览器缓存后丢失。</p>
+
+        <div class="settings-actions">
+          <button class="setting-btn" id="exportTxtBtn">导出 TXT <span>阅读备份</span></button>
+          <button class="setting-btn" id="exportJsonBtn">导出 JSON <span>升级备用</span></button>
+          <button class="setting-btn" id="copyAllBtn">复制全部灵感 <span>粘贴到笔记</span></button>
+          <button class="setting-btn" id="clearBtn" style="color:var(--red);">清空全部数据 <span>谨慎操作</span></button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <button class="fab" id="fabBtn">＋</button>
+
+  <nav class="bottom-nav">
+    <button class="nav-btn active" data-page="home"><b>⌂</b>首页</button>
+    <button class="nav-btn" data-page="inbox"><b>☷</b>灵感库</button>
+    <button class="nav-btn" data-page="review"><b>◎</b>回顾</button>
+    <button class="nav-btn" data-page="settings"><b>◌</b>设置</button>
+  </nav>
+
+  <div class="modal-mask" id="quickModal">
+    <div class="modal">
+      <h3>快速记录</h3>
+      <textarea id="modalInput" maxlength="600" placeholder="输入突然想到的灵感..."></textarea>
+      <div class="chips" id="modalChips" style="padding-top:12px;"></div>
+      <div class="modal-row">
+        <button id="cancelModal">取消</button>
+        <button class="primary" id="saveModal">保存灵感</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const STORAGE_KEY = "linggan_shanji_neon_app_v2";
+
+    const categories = ["想法", "文章", "视频", "产品", "工具", "句子", "生活", "图片", "链接", "其他"];
+    const statuses = ["待整理", "值得做", "已行动", "暂存"];
+
+    const statusCopy = {
+      "待整理": "还没判断价值",
+      "值得做": "值得继续推进",
+      "已行动": "已经开始处理",
+      "暂存": "先放一放"
+    };
+
+    let ideas = loadIdeas();
+    let currentCategory = "想法";
+    let modalCategory = "想法";
+    let filterStatus = "全部";
+    let filterCategory = "全部";
+
+    const ideaInput = document.getElementById("ideaInput");
+    const modalInput = document.getElementById("modalInput");
+    const saveBtn = document.getElementById("saveBtn");
+    const charNow = document.getElementById("charNow");
+    const categoryChips = document.getElementById("categoryChips");
+    const modalChips = document.getElementById("modalChips");
+    const recentList = document.getElementById("recentList");
+    const inboxList = document.getElementById("inboxList");
+    const worthList = document.getElementById("worthList");
+    const searchInput = document.getElementById("searchInput");
+    const statusFilters = document.getElementById("statusFilters");
+    const categoryFilters = document.getElementById("categoryFilters");
+    const toast = document.getElementById("toast");
+    const quickModal = document.getElementById("quickModal");
+
+    init();
+
+    function init() {
+      renderChips();
+      renderFilters();
+      bindEvents();
+      renderAll();
+      autoResize(ideaInput);
+    }
+
+    function bindEvents() {
+      saveBtn.addEventListener("click", () => addIdea(ideaInput.value, currentCategory, ideaInput));
+
+      ideaInput.addEventListener("keydown", e => {
+        if (e.key === "Enter" && !e.shiftKey) {
+          e.preventDefault();
+          addIdea(ideaInput.value, currentCategory, ideaInput);
+        }
+      });
+
+      ideaInput.addEventListener("input", () => {
+        charNow.textContent = ideaInput.value.length;
+        autoResize(ideaInput);
+      });
+
+      modalInput.addEventListener("keydown", e => {
+        if (e.key === "Enter" && !e.shiftKey) {
+          e.preventDefault();
+          addIdea(modalInput.value, modalCategory, modalInput);
+          closeModal();
+        }
+      });
+
+      modalInput.addEventListener("input", () => autoResize(modalInput));
+
+      document.querySelectorAll(".nav-btn").forEach(btn => {
+        btn.addEventListener("click", () => switchPage(btn.dataset.page));
+      });
+
+      document.querySelectorAll("[data-jump]").forEach(btn => {
+        btn.addEventListener("click", () => switchPage(btn.dataset.jump));
+      });
+
+      searchInput.addEventListener("input", renderInbox);
+
+      document.getElementById("fabBtn").addEventListener("click", openModal);
+      document.getElementById("openQuickModal").addEventListener("click", openModal);
+      document.getElementById("cancelModal").addEventListener("click", closeModal);
+      document.getElementById("saveModal").addEventListener("click", () => {
+        addIdea(modalInput.value, modalCategory, modalInput);
+        closeModal();
+      });
+
+      quickModal.addEventListener("click", e => {
+        if (e.target === quickModal) closeModal();
+      });
+
+
+      document.getElementById("exportTxtBtn").addEventListener("click", exportTxt);
+      document.getElementById("exportJsonBtn").addEventListener("click", exportJson);
+      document.getElementById("copyAllBtn").addEventListener("click", copyAll);
+      document.getElementById("clearBtn").addEventListener("click", clearAll);
+    }
+
+    function renderChips() {
+      if (categoryChips) {
+        categoryChips.innerHTML = categories.map(cat => `
+          <button class="chip ${cat === currentCategory ? "active" : ""}" data-cat="${cat}">${cat}</button>
+        `).join("");
+
+        categoryChips.querySelectorAll(".chip").forEach(chip => {
+          chip.addEventListener("click", () => {
+            currentCategory = chip.dataset.cat;
+            renderChips();
+          });
+        });
+      }
+
+      modalChips.innerHTML = categories.map(cat => `
+        <button class="chip ${cat === modalCategory ? "active" : ""}" data-modal-cat="${cat}">${cat}</button>
+      `).join("");
+
+      modalChips.querySelectorAll(".chip").forEach(chip => {
+        chip.addEventListener("click", () => {
+          modalCategory = chip.dataset.modalCat;
+          renderChips();
+        });
+      });
+    }
+
+    function renderFilters() {
+      const statusItems = ["全部", ...statuses];
+      statusFilters.innerHTML = statusItems.map(s => `
+        <button class="filter-pill ${s === filterStatus ? "active" : ""}" data-status-filter="${s}">${s}</button>
+      `).join("");
+
+      statusFilters.querySelectorAll(".filter-pill").forEach(btn => {
+        btn.addEventListener("click", () => {
+          filterStatus = btn.dataset.statusFilter;
+          renderFilters();
+          renderInbox();
+        });
+      });
+
+      const categoryItems = ["全部", ...categories];
+      categoryFilters.innerHTML = categoryItems.map(c => `
+        <button class="filter-pill ${c === filterCategory ? "active" : ""}" data-category-filter="${c}">${c}</button>
+      `).join("");
+
+      categoryFilters.querySelectorAll(".filter-pill").forEach(btn => {
+        btn.addEventListener("click", () => {
+          filterCategory = btn.dataset.categoryFilter;
+          renderFilters();
+          renderInbox();
+        });
+      });
+    }
+
+    function addIdea(rawText, category, inputEl) {
+      const text = rawText.trim();
+      if (!text) {
+        showToast("先写一点灵感");
+        return;
+      }
+
+      const firstLine = text.split(/\n/).find(Boolean) || text;
+      const idea = {
+        id: Date.now().toString(36) + Math.random().toString(36).slice(2, 8),
+        title: firstLine.slice(0, 36),
+        text,
+        category,
+        status: "待整理",
+        starred: false,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      };
+
+      ideas.unshift(idea);
+      saveIdeas();
+
+      inputEl.value = "";
+      if (inputEl === ideaInput) {
+        charNow.textContent = 0;
+      }
+      autoResize(inputEl);
+      renderAll();
+      showToast("灵感已进入收件箱");
+    }
+
+    function renderAll() {
+      renderStats();
+      renderRecent();
+      renderInbox();
+      renderReview();
+    }
+
+    function renderStats() {
+      setText("todayCount", countToday(ideas));
+      setText("totalCount", ideas.length);
+      setText("worthCount", ideas.filter(i => i.status === "值得做").length);
+      setText("inboxCount", `${ideas.length} 条`);
+      setText("weekCount", countThisWeek(ideas));
+      setText("reviewWorthCount", ideas.filter(i => i.status === "值得做").length);
+    }
+
+    function setText(id, value) {
+      const el = document.getElementById(id);
+      if (el) el.textContent = value;
+    }
+
+    function renderRecent() {
+      const list = ideas.slice(0, 5);
+      recentList.innerHTML = list.length ? list.map(renderIdeaCard).join("") : emptyHTML("还没有记录。<br>输入一个想法，按回车保存。");
+      bindCardEvents(recentList);
+    }
+
+    function renderInbox() {
+      const keyword = searchInput.value.trim().toLowerCase();
+
+      const list = ideas.filter(item => {
+        const matchKeyword = !keyword ||
+          item.text.toLowerCase().includes(keyword) ||
+          item.category.toLowerCase().includes(keyword) ||
+          item.status.toLowerCase().includes(keyword);
+
+        const matchStatus = filterStatus === "全部" || item.status === filterStatus;
+        const matchCategory = filterCategory === "全部" || item.category === filterCategory;
+        return matchKeyword && matchStatus && matchCategory;
+      });
+
+      inboxList.innerHTML = list.length ? list.map(renderIdeaCard).join("") : emptyHTML("没有找到相关灵感。");
+      bindCardEvents(inboxList);
+    }
+
+    function renderReview() {
+      const worth = ideas.filter(i => i.status === "值得做");
+      worthList.innerHTML = worth.length ? worth.map(renderIdeaCard).join("") : emptyHTML("暂无“值得做”的灵感。<br>可以在收件箱里把重要卡片标记出来。");
+      bindCardEvents(worthList);
+    }
+
+    function renderIdeaCard(item) {
+      const desc = item.text.length > 42 ? item.text.slice(0, 56) + "..." : item.text;
+      return `
+        <article class="idea-card ${item.status === "值得做" ? "worth" : ""}" data-id="${item.id}">
+          ${item.status === "值得做" ? '<div class="worth-badge">重点</div>' : ''}
+          <div class="card-head">
+            <div class="idea-title" contenteditable="true" spellcheck="false">${escapeHTML(item.title || item.text)}</div>
+            <button class="star ${item.starred ? "active" : ""}" data-action="star">★</button>
+          </div>
+
+          <p class="card-desc">${escapeHTML(desc)}</p>
+
+          <div class="card-meta">
+            <span class="tag category">${escapeHTML(item.category)}</span>
+            <span class="tag status">${escapeHTML(item.status)}</span>
+            <span class="tag time">${formatTime(item.createdAt)}</span>
+          </div>
+
+          <div class="compact-control">
+            <select class="category-select" data-action="categorySelect">
+              ${categories.map(c => `<option value="${c}" ${c === item.category ? "selected" : ""}>${c}</option>`).join("")}
+            </select>
+            <select class="status-select" data-action="statusSelect">
+              ${statuses.map(s => `<option value="${s}" ${s === item.status ? "selected" : ""}>状态：${s}</option>`).join("")}
+            </select>
+            <div class="card-actions">
+              <button class="mini-btn primary" data-action="saveEdit" title="保存修改">✓</button>
+              <button class="mini-btn" data-action="copy" title="复制">⧉</button>
+              <button class="mini-btn danger" data-action="delete" title="删除">×</button>
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
+    function bindCardEvents(container) {
+      container.querySelectorAll(".idea-card").forEach(card => {
+        const id = card.dataset.id;
+
+        const categorySelect = card.querySelector('[data-action="categorySelect"]');
+        if (categorySelect) {
+          categorySelect.addEventListener("change", () => {
+            updateIdea(id, { category: categorySelect.value });
+            showToast(`分类已改为：${categorySelect.value}`);
+          });
+        }
+
+        const statusSelect = card.querySelector('[data-action="statusSelect"]');
+        if (statusSelect) {
+          statusSelect.addEventListener("change", () => {
+            updateIdea(id, { status: statusSelect.value });
+            showToast(`状态已改为：${statusSelect.value}`);
+          });
+        }
+
+        card.querySelector('[data-action="star"]').addEventListener("click", () => {
+          const item = ideas.find(i => i.id === id);
+          if (!item) return;
+          updateIdea(id, { starred: !item.starred });
+          showToast(!item.starred ? "已收藏" : "已取消收藏");
+        });
+
+        card.querySelector('[data-action="copy"]').addEventListener("click", async () => {
+          const item = ideas.find(i => i.id === id);
+          await copyText(item ? item.text : "");
+          showToast("已复制");
+        });
+
+        card.querySelector('[data-action="saveEdit"]').addEventListener("click", () => {
+          const title = card.querySelector(".idea-title").innerText.trim();
+          if (!title) {
+            showToast("标题不能为空");
+            return;
+          }
+          updateIdea(id, { title });
+          showToast("修改已保存");
+        });
+
+
+        card.querySelector('[data-action="delete"]').addEventListener("click", () => {
+          if (confirm("确定删除这条灵感吗？")) {
+            ideas = ideas.filter(i => i.id !== id);
+            saveIdeas();
+            renderAll();
+            showToast("已删除");
+          }
+        });
+
+        card.querySelector(".idea-title").addEventListener("blur", e => {
+          const title = e.target.innerText.trim();
+          const item = ideas.find(i => i.id === id);
+          if (item && title && title !== item.title) {
+            updateIdea(id, { title }, false);
+          }
+        });
+      });
+    }
+
+    function updateIdea(id, patch, shouldRender = true) {
+      ideas = ideas.map(item => {
+        if (item.id !== id) return item;
+        return {
+          ...item,
+          ...patch,
+          updatedAt: new Date().toISOString()
+        };
+      });
+      saveIdeas();
+      if (shouldRender) renderAll();
+    }
+
+    function switchPage(page) {
+      document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+      document.getElementById(`page-${page}`).classList.add("active");
+
+      document.querySelectorAll(".nav-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.page === page);
+      });
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      renderAll();
+    }
+
+    function openModal() {
+      quickModal.classList.add("show");
+      setTimeout(() => modalInput.focus(), 80);
+    }
+
+    function closeModal() {
+      quickModal.classList.remove("show");
+      modalInput.value = "";
+      autoResize(modalInput);
+    }
+
+    function loadIdeas() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return sampleIdeas();
+        const parsed = JSON.parse(raw);
+        return Array.isArray(parsed) ? parsed : [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveIdeas() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(ideas));
+    }
+
+    function sampleIdeas() {
+      return [
+        {
+          id: "sample1",
+          title: "做一个梦境记录工具",
+          text: "做一个梦境记录工具，醒来以后快速记录梦里的画面、情绪和关键词。",
+          category: "产品",
+          status: "值得做",
+          starred: true,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        },
+        {
+          id: "sample2",
+          title: "写一篇关于自律的视频脚本",
+          text: "主题：自律不是逼自己，而是减少选择成本。",
+          category: "视频",
+          status: "待整理",
+          starred: false,
+          createdAt: new Date(Date.now() - 1000 * 60 * 90).toISOString(),
+          updatedAt: new Date(Date.now() - 1000 * 60 * 90).toISOString()
+        },
+        {
+          id: "sample3",
+          title: "产品名：闪念盒子",
+          text: "一个收集零散想法的 App 名字，可以叫闪念盒子。",
+          category: "句子",
+          status: "暂存",
+          starred: false,
+          createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24).toISOString(),
+          updatedAt: new Date(Date.now() - 1000 * 60 * 60 * 24).toISOString()
+        }
+      ];
+    }
+
+    function countToday(list) {
+      const today = new Date();
+      return list.filter(item => {
+        const d = new Date(item.createdAt);
+        return d.getFullYear() === today.getFullYear() &&
+               d.getMonth() === today.getMonth() &&
+               d.getDate() === today.getDate();
+      }).length;
+    }
+
+    function countThisWeek(list) {
+      const now = new Date();
+      const day = now.getDay() || 7;
+      const monday = new Date(now);
+      monday.setHours(0,0,0,0);
+      monday.setDate(now.getDate() - day + 1);
+      return list.filter(item => new Date(item.createdAt) >= monday).length;
+    }
+
+    function formatTime(iso) {
+      const d = new Date(iso);
+      const now = new Date();
+      const pad = n => String(n).padStart(2, "0");
+      const time = `${pad(d.getHours())}:${pad(d.getMinutes())}`;
+      if (d.toDateString() === now.toDateString()) return `今天 ${time}`;
+      const yesterday = new Date(now);
+      yesterday.setDate(now.getDate() - 1);
+      if (d.toDateString() === yesterday.toDateString()) return `昨天 ${time}`;
+      return `${d.getMonth() + 1}-${d.getDate()} ${time}`;
+    }
+
+    function formatFullTime(iso) {
+      const d = new Date(iso);
+      const pad = n => String(n).padStart(2, "0");
+      return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+    }
+
+    function exportTxt() {
+      if (!ideas.length) return showToast("暂无可导出内容");
+
+      const text = ideas.map((i, index) => {
+        return [
+          `#${index + 1}`,
+          `标题：${i.title}`,
+          `内容：${i.text}`,
+          `分类：${i.category}`,
+          `状态：${i.status}`,
+          `收藏：${i.starred ? "是" : "否"}`,
+          `时间：${formatFullTime(i.createdAt)}`
+        ].join("\n");
+      }).join("\n\n--------------------\n\n");
+
+      downloadFile(`灵感闪记_${dateFileName()}.txt`, text, "text/plain;charset=utf-8");
+      showToast("TXT 已导出");
+    }
+
+    function exportJson() {
+      if (!ideas.length) return showToast("暂无可导出内容");
+      downloadFile(`灵感闪记_${dateFileName()}.json`, JSON.stringify(ideas, null, 2), "application/json;charset=utf-8");
+      showToast("JSON 已导出");
+    }
+
+    async function copyAll() {
+      if (!ideas.length) return showToast("暂无内容");
+      const text = ideas.map((i, index) => `${index + 1}. [${i.category}/${i.status}] ${i.title}\n${i.text}`).join("\n\n");
+      await copyText(text);
+      showToast("全部灵感已复制");
+    }
+
+    function clearAll() {
+      if (!ideas.length) return showToast("暂无数据");
+      if (!confirm("确定清空全部灵感吗？这个操作不可恢复。建议先导出备份。")) return;
+      ideas = [];
+      saveIdeas();
+      renderAll();
+      showToast("已清空");
+    }
+
+    function downloadFile(filename, content, type) {
+      const blob = new Blob([content], { type });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    async function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+      } else {
+        const temp = document.createElement("textarea");
+        temp.value = text;
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand("copy");
+        temp.remove();
+      }
+    }
+
+    function emptyHTML(text) {
+      return `<div class="empty">${text}</div>`;
+    }
+
+    function escapeHTML(str) {
+      return String(str).replace(/[&<>"']/g, ch => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+      }[ch]));
+    }
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add("show");
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => toast.classList.remove("show"), 1500);
+    }
+
+    function autoResize(el) {
+      el.style.height = "auto";
+      el.style.height = Math.min(el.scrollHeight, 180) + "px";
+    }
+
+    function dateFileName() {
+      const d = new Date();
+      const pad = n => String(n).padStart(2, "0");
+      return `${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}`;
+    }
+  </script>
+</body>
+</html>
