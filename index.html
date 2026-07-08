@@ -3,6 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="灵感闪记" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="theme-color" content="#050811" />
+  <meta name="format-detection" content="telephone=no" />
+  <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxODAiIGhlaWdodD0iMTgwIiB2aWV3Qm94PSIwIDAgMTgwIDE4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzZBN0NGRiIvPjxzdG9wIG9mZnNldD0iMC41NSIgc3RvcC1jb2xvcj0iIzhCNUNGRiIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI0ZGNUZEMiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxODAiIGhlaWdodD0iMTgwIiByeD0iNDIiIGZpbGw9IiMwNTA4MTEiLz48Y2lyY2xlIGN4PSIxMjYiIGN5PSI0OCIgcj0iMzAiIGZpbGw9IiM2QTdDRkYiIG9wYWNpdHk9Ii4zNSIvPjxwYXRoIGQ9Ik04NiAzMmwxMyAzNyAzOSAxMi0zOSAxMy0xMyA1NC0xNi01NC0zOS0xMyAzOS0xMiAxNi0zN3oiIGZpbGw9InVybCgjZykiLz48Y2lyY2xlIGN4PSIxMjgiIGN5PSIxMTgiIHI9IjciIGZpbGw9IiNmZmYiLz48L3N2Zz4=" />
+  <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxODAiIGhlaWdodD0iMTgwIiB2aWV3Qm94PSIwIDAgMTgwIDE4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzZBN0NGRiIvPjxzdG9wIG9mZnNldD0iMC41NSIgc3RvcC1jb2xvcj0iIzhCNUNGRiIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI0ZGNUZEMiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxODAiIGhlaWdodD0iMTgwIiByeD0iNDIiIGZpbGw9IiMwNTA4MTEiLz48Y2lyY2xlIGN4PSIxMjYiIGN5PSI0OCIgcj0iMzAiIGZpbGw9IiM2QTdDRkYiIG9wYWNpdHk9Ii4zNSIvPjxwYXRoIGQ9Ik04NiAzMmwxMyAzNyAzOSAxMi0zOSAxMy0xMyA1NC0xNi01NC0zOS0xMyAzOS0xMiAxNi0zN3oiIGZpbGw9InVybCgjZykiLz48Y2lyY2xlIGN4PSIxMjgiIGN5PSIxMTgiIHI9IjciIGZpbGw9IiNmZmYiLz48L3N2Zz4=" />
   <title>灵感闪记</title>
   <style>
     :root {
@@ -877,6 +885,10 @@
         display: none;
       }
     }
+  
+    body.standalone-mode .app {
+      padding-top: max(18px, env(safe-area-inset-top));
+    }
   </style>
 </head>
 <body>
@@ -1049,6 +1061,13 @@
     const quickModal = document.getElementById("quickModal");
 
     init();
+
+    function markStandaloneMode() {
+      const isStandalone = window.navigator.standalone || window.matchMedia("(display-mode: standalone)").matches;
+      if (isStandalone) document.body.classList.add("standalone-mode");
+    }
+    markStandaloneMode();
+
 
     function init() {
       renderChips();
